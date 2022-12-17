@@ -2,10 +2,23 @@
 import typing as ty
 import math
 
-from PyQt6.QtWidgets import QPushButton
+from PyQt6.QtWidgets import QPushButton,QApplication
 from PyQt6.QtWidgets import QRadioButton,QMessageBox
 
 class HelperMethods():
+
+    @classmethod
+    def setButDisabled(cls,text:str,but:QPushButton):
+        but.setText(text)
+        but.setDisabled(True)
+        QApplication.processEvents()
+
+    @classmethod
+    def setButEnabled(cls,text:str,but:QPushButton):
+        but.setText(text)
+        but.setEnabled(True)
+
+
     @classmethod
     def ProducePushBut(cls,butText:str,connectFunc:ty.Callable[[],None],height=30,argsConnectFunc = [],self = None,styles="") -> QPushButton:
         if self !=None: but = QPushButton(butText,self)
