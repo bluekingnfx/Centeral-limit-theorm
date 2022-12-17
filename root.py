@@ -78,12 +78,12 @@ class CentralLimitTheorem(QMainWindow):
             if turns <= 0: 
                 raise Exception("Turns is zero")
             text = f"You have selected {value} rolls per sample. Click OK to continue."
-            HM.ProduceMessageBox(self,"question","Confirm?",text,self.Solution,None,[value,turns,mainVLay,but])
+            HM.ProduceMessageBox(self,"question","Confirm?",text,self.Solution,HM.setButEnabled,[value,turns,mainVLay,but],["Process",but])
         except Exception as e:
             if str(e) == "No Repeated rolls for single sampling is been selected.":
-                HM.ProduceMessageBox(self,"about","Error",str(e))
+                HM.ProduceMessageBox(self,"about","Error",str(e),HM.setButEnabled,None,["Process",but])
             else:
-                HM.ProduceMessageBox(self,"about","Error",f"The sample count must be a number greater than 0. Given {edit.text()}. Please give a valid number.")
+                HM.ProduceMessageBox(self,"about","Error",f"The sample count must be a number greater than 0. Given {edit.text()}. Please give a valid number.",HM.setButEnabled,None,["Process",but])
         
 
     def Solution(self,value:int,turns:int,mainVLay:QVBoxLayout,but:QPushButton):
@@ -162,8 +162,6 @@ class CentralLimitTheorem(QMainWindow):
         mainVLay.addWidget(widget)
 
         
-
-
 if not QApplication.instance():
     app = QApplication(sy.argv)
 else:
